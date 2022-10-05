@@ -4,7 +4,7 @@
 #
 Name     : pypi-django_babel
 Version  : 0.6.2
-Release  : 1
+Release  : 2
 URL      : https://files.pythonhosted.org/packages/87/e2/a009668c03148a62bc1d9cb6a30769de1eeab12e70824b609d5b405b5f6e/django-babel-0.6.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/87/e2/a009668c03148a62bc1d9cb6a30769de1eeab12e70824b609d5b405b5f6e/django-babel-0.6.2.tar.gz
 Summary  : Utilities for using Babel in Django
@@ -63,7 +63,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1664988622
+export SOURCE_DATE_EPOCH=1665000960
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -73,6 +73,7 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
+pypi-dep-fix.py . django
 python3 setup.py build
 
 pushd ../buildavx2/
@@ -81,6 +82,7 @@ export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+pypi-dep-fix.py . django
 python3 setup.py build
 
 popd
@@ -90,6 +92,7 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-django_babel
 cp %{_builddir}/django-babel-%{version}/COPYING %{buildroot}/usr/share/package-licenses/pypi-django_babel/ef9326d4a7684b004c434fcae02325c57b86d2e8 || :
 python3 -tt setup.py build  install --root=%{buildroot}
+pypi-dep-fix.py %{buildroot} django
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
