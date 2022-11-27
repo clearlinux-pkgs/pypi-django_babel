@@ -4,7 +4,7 @@
 #
 Name     : pypi-django_babel
 Version  : 0.6.2
-Release  : 34
+Release  : 35
 URL      : https://files.pythonhosted.org/packages/87/e2/a009668c03148a62bc1d9cb6a30769de1eeab12e70824b609d5b405b5f6e/django-babel-0.6.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/87/e2/a009668c03148a62bc1d9cb6a30769de1eeab12e70824b609d5b405b5f6e/django-babel-0.6.2.tar.gz
 Summary  : Utilities for using Babel in Django
@@ -63,7 +63,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1669403124
+export SOURCE_DATE_EPOCH=1669555835
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
