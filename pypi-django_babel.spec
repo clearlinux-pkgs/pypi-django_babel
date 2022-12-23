@@ -4,7 +4,7 @@
 #
 Name     : pypi-django_babel
 Version  : 0.6.2
-Release  : 48
+Release  : 49
 URL      : https://files.pythonhosted.org/packages/87/e2/a009668c03148a62bc1d9cb6a30769de1eeab12e70824b609d5b405b5f6e/django-babel-0.6.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/87/e2/a009668c03148a62bc1d9cb6a30769de1eeab12e70824b609d5b405b5f6e/django-babel-0.6.2.tar.gz
 Summary  : Utilities for using Babel in Django
@@ -56,6 +56,7 @@ python3 components for the pypi-django_babel package.
 cd %{_builddir}/django-babel-0.6.2
 pushd ..
 cp -a django-babel-0.6.2 buildavx2
+cp -a django-babel-0.6.2 buildavx512
 popd
 
 %build
@@ -63,7 +64,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1671563564
+export SOURCE_DATE_EPOCH=1671823791
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -77,8 +78,8 @@ pypi-dep-fix.py . django
 python3 setup.py build
 
 pushd ../buildavx2/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -msse2avx "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -msse2avx"
 export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
@@ -90,14 +91,14 @@ popd
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-django_babel
-cp %{_builddir}/django-babel-%{version}/COPYING %{buildroot}/usr/share/package-licenses/pypi-django_babel/ef9326d4a7684b004c434fcae02325c57b86d2e8 || :
+cp %{_builddir}/django-babel-%{version}/COPYING %{buildroot}/usr/share/package-licenses/pypi-django_babel/ef9326d4a7684b004c434fcae02325c57b86d2e8
 python3 -tt setup.py build  install --root=%{buildroot}
 pypi-dep-fix.py %{buildroot} django
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
 pushd ../buildavx2/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -msse2avx "
 export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
